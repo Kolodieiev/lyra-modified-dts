@@ -1,0 +1,51 @@
+/dts-v1/;
+
+/memreserve/	0x00007bfa46200000 0x0000000000000600;
+/ {
+	version = <0x00>;
+	totalsize = <0x5fc000>;
+	timestamp = <0x680106c5>;
+	description = "U-Boot FIT source file for arm";
+
+	images {
+
+	    fdt {
+		data-size = <0x721C>;
+		data-position = <0x800>;
+		type = "flat_dt";
+		arch = "arm";
+		compression = "none";
+		load = <0xffffff00>;
+	    };
+	    
+	    kernel {
+		data-size = <0x490398>;
+		data-position = <0x9400>;
+		type = "kernel";
+		arch = "arm";
+		os = "linux";
+		compression = "none";
+		entry = <0xffffff01>;
+		load = <0xffffff01>;
+	    };
+	    
+	    resource {
+		data-size = <0x162400>;
+		data-position = <0x499800>;
+		type = "multi";
+		arch = "arm";
+		compression = "none";
+	    };
+	};
+
+	configurations {
+		default = "conf";
+
+		conf {
+			rollback-index = <0x00>;
+			fdt = "fdt";
+			kernel = "kernel";
+			multi = "resource";
+		};
+	};
+};
